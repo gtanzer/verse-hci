@@ -6,3 +6,6 @@ let stdfuns : (string * ty) list = [ "String.sub", TFun ([TStr; TInt; TInt], TSt
                                    ; "String.append", TFun ([TStr; TStr], TStr)]
 
 let stdlib : ty Ctxt.t = List.fold_left (fun c (s, t) -> Ctxt.add s t c) Ctxt.empty stdfuns
+
+let stdmaps : (string * string) list = [ "String.sub", "Substring"
+                                       ; "String.append", "Append" ]

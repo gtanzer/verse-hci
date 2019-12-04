@@ -8,7 +8,6 @@ type ty =
 | TStr
 | TFun of ty list * ty
 | TPair of ty * ty
-| TList
 
 type exp =
 | CBool of bool

@@ -1,3 +1,5 @@
+open Ast
+
 type operator =
 | OHole
 | OVBool
@@ -12,8 +14,16 @@ type operator =
 | OOpn of string * operator list
 
 module Operator = struct
-  type t = operator
-  let compare = compare
+    type t = operator
+    let compare = compare
+end
+
+module Ty = struct
+    type t = ty
+    let compare = compare
 end
 
 module Dsl = Set.Make(Operator)
+module TMap = Map.Make(Ty)
+
+type dsl = ty * ty * (Dsl.t TMap.t)
