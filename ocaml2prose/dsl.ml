@@ -1,5 +1,3 @@
-open Ast
-
 type operator =
 | OHole
 | OVBool
