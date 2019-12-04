@@ -1,0 +1,18 @@
+[WitnessFunction(nameof(Semantics.AbsPos), 1)]
+        public DisjunctiveExamplesSpec WitnessK(GrammarRule rule, DisjunctiveExamplesSpec spec) {
+
+            var kExamples = new Dictionary<State, IEnumerable<object>>();
+            foreach (var example in spec.DisjunctiveExamples) {
+                State inputState = example.Key;
+                var v = inputState[rule.Body[0]] as string;
+
+                var positions = new List<int>();
+                foreach (int pos in example.Value) {
+                    positions.Add((int)pos + 1);
+                    positions.Add((int)pos - v.Length - 1);
+                }
+                if (positions.Count == 0) return null;
+                kExamples[inputState] = positions.Cast<object>();
+            }
+            return DisjunctiveExamplesSpec.From(kExamples);
+        }

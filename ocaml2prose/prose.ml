@@ -1,6 +1,7 @@
 open Ast
 
 module Ctxt = Map.Make(String)
+module StringS = Set.Make(String)
 
 let stdfuns : (string * ty) list = [ "String.sub", TFun ([TStr; TInt; TInt], TStr)
                                    ; "String.append", TFun ([TStr; TStr], TStr)]

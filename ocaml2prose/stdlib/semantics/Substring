@@ -1,0 +1,1 @@
+public static string Substring(string v, int start, int end) => v.Substring(start, end - start);

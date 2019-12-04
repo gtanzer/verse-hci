@@ -1,0 +1,1 @@
+public static string Append(string prefix, string suffix) => prefix + suffix;

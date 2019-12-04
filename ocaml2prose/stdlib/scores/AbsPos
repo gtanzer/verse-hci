@@ -1,0 +1,2 @@
+[FeatureCalculator(nameof(Semantics.AbsPos))]
+public static double AbsPos(double v, double k) => -1.0;

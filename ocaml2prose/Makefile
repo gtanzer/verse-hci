@@ -7,3 +7,4 @@ main.native:
 .PHONY: clean
 clean:
 	ocamlbuild -clean
+	rm -rf ./output
