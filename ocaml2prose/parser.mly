@@ -40,7 +40,7 @@ open Ast
 %%
 
 corpus:
-| AT i=input AT o=output es=separated_list(SEMICOLON,exp) EOF { i, o, es }
+| AT i=input AT o=output es=separated_list(SEMICOLON,let_exp) EOF { i, o, es }
 
 ty:
 | TINT {TInt}
@@ -53,6 +53,10 @@ input:
 output:
 | OUTPUT t=ty { t }
 
+let_exp:
+| LET id=IDENT EQ e1=exp IN e2=let_exp {Let(id, e1, e2)}
+| e=exp {e}
+
 exp:
 | LPAREN e=exp RPAREN {e}
 | TRUE {CBool true}
@@ -62,7 +66,6 @@ exp:
 | e1=exp b=bop e2=exp {Bop(b, e1, e2)}
 | id=IDENT {Id id}
 | f=exp LPAREN es=separated_list(COMMA, exp) RPAREN {App (f, es)}
-| LET id=IDENT EQ e1=exp IN e2=exp {Let(id, e1, e2)}
 
 %inline bop:
 | PLUS   { Add }
