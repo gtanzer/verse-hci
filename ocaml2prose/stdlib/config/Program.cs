@@ -17,7 +17,7 @@ namespace VerseApp {
 
         static Grammar grammar = DSLCompiler.
             Compile(new CompilerOptions() {
-                InputGrammarText = File.ReadAllText("./synthesis/grammar/substring.grammar"),
+                InputGrammarText = File.ReadAllText("./synthesis/grammar/verse.grammar"),
                 References = CompilerReference.FromAssemblyFiles(typeof(Program).GetTypeInfo().Assembly)
             }).Value;
         static SynthesisEngine prose;

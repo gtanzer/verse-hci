@@ -23,7 +23,7 @@ module Ty = struct
     let compare = compare
 end
 
-module Dsl = Set.Make(Operator)
+module Rule = Set.Make(Operator)
 module TMap = Map.Make(Ty)
 
-type dsl = ty * ty * (Dsl.t TMap.t)
+type dsl = ty * ty * (Rule.t TMap.t)

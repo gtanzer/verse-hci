@@ -5,13 +5,13 @@ open Typecheck
 
 let update_union y oz =
     begin match oz with
-    | Some z -> Some (Dsl.add y z)
-    | None -> Some (Dsl.singleton y)
+    | Some z -> Some (Rule.add y z)
+    | None -> Some (Rule.singleton y)
     end
 
-let insert x y m : Dsl.t TMap.t = TMap.update x (update_union y) m
+let insert x y m : Rule.t TMap.t = TMap.update x (update_union y) m
 
-let rec ext_dsl_exp (d : Dsl.t TMap.t) (e : exp) : Dsl.t TMap.t =
+let rec ext_dsl_exp (d : Rule.t TMap.t) (e : exp) : Rule.t TMap.t =
     begin match e with
     | CBool b -> insert TBool OVBool d
     | CInt i -> insert TInt OVInt d
@@ -22,7 +22,11 @@ let rec ext_dsl_exp (d : Dsl.t TMap.t) (e : exp) : Dsl.t TMap.t =
                            ext_dsl_exp d'' e2
 
     | Id x -> if Ctxt.mem x stdlib
-              then insert (Ctxt.find x stdlib) (OOp0 x) d
+              then let t = Ctxt.find x stdlib in
+                   begin match t with
+                   | TFun (ts, rt) -> insert (rt) (OOp0 (List.assoc x stdnames)) d
+                   | _ -> failwith "all stdlib ids are functions"
+                   end
               else d
     
     | App (f, es) -> List.fold_left ext_dsl_exp (ext_dsl_exp d f) es
