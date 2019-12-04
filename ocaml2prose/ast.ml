@@ -5,7 +5,7 @@ type binop =
 type ty =
 | TBool
 | TInt
-| TString
+| TStr
 | TFun of ty list * ty
 | TPair of ty * ty
 | TList

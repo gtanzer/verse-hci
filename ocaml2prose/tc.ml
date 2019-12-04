@@ -1,8 +1,6 @@
 open Ast
 open Prose
 
-let foo () = Printf.printf "hi"
-
 let ti_binop (bop : binop) : (ty * ty) * ty =
     begin match bop with
     | Add | Sub -> (TInt, TInt), TInt
@@ -12,7 +10,7 @@ let rec ti_exp (c : ty Ctxt.t) (e : exp) : ty =
     begin match e with
     | CBool _ -> TBool
     | CInt _ -> TInt
-    | CStr _ -> TString
+    | CStr _ -> TStr
     
     | Bop (bop, e1, e2) -> let (t1, t2), t3 = ti_binop bop in
                            tc_exp c t1 e1;
