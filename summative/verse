@@ -1,0 +1,3 @@
+#! /bin/bash
+
+exec ../ocaml2prose/verse.sh "$@"

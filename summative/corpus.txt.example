@@ -1,0 +1,4 @@
+@input string x
+@output string
+
+append(x, x)
