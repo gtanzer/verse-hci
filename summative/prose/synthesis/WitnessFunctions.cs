@@ -19,9 +19,42 @@ namespace ProseSummative {
     public class WitnessFunctions : DomainLearningLogic {
         public WitnessFunctions(Grammar grammar) : base(grammar) { }
 
-        /*
+        [WitnessFunction(nameof(Semantics.Substring), 1)]
+        public DisjunctiveExamplesSpec WitnessStartPosition(GrammarRule rule, ExampleSpec spec) {
+            var result = new Dictionary<State, IEnumerable<object>>();
+
+            foreach (var example in spec.Examples) {
+                State inputState = example.Key;
+                var input = inputState[rule.Body[0]] as string;
+                var output = example.Value as string;
+                var occurrences = new List<int>();
+
+                for (int i = input.IndexOf(output); i >= 0; i = input.IndexOf(output, i + 1)) {
+                    occurrences.Add(i);
+                }
+
+                if (occurrences.Count == 0) return null;
+                result[inputState] = occurrences.Cast<object>();
+            }
+            return new DisjunctiveExamplesSpec(result);
+
+        }
+
+        [WitnessFunction(nameof(Semantics.Substring), 2, DependsOnParameters = new []{1})]
+        public ExampleSpec WitnessEndPosition(GrammarRule rule, ExampleSpec spec, ExampleSpec startSpec) {
+            var result = new Dictionary<State, object>();
+            foreach (var example in spec.Examples) {
+                State inputState = example.Key;
+                var output = example.Value as string;
+                var start = (int) startSpec.Examples[inputState];
+                result[inputState] = start + output.Length;
+            }
+            return new ExampleSpec(result);
+        }
+
         [WitnessFunction(nameof(Semantics.AbsPos), 1)]
         public DisjunctiveExamplesSpec WitnessK(GrammarRule rule, DisjunctiveExamplesSpec spec) {
+
             var kExamples = new Dictionary<State, IEnumerable<object>>();
             foreach (var example in spec.DisjunctiveExamples) {
                 State inputState = example.Key;
@@ -37,6 +70,5 @@ namespace ProseSummative {
             }
             return DisjunctiveExamplesSpec.From(kExamples);
         }
-        */
     }
 }

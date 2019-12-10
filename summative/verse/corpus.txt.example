@@ -1,4 +1,4 @@
 @input string x
 @output string
 
-append(x, x)
+substring(x, 1, -2)

@@ -6,4 +6,7 @@ language Summative;
 @complete feature double Score = ProseSummative.RankingScore;
 
 @input string v;
-@start string program = TODO
+@start string v | Substring(v, pos, pos);
+
+int pos := AbsPos(v, k);
+int k; 

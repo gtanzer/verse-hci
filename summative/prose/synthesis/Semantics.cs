@@ -16,14 +16,11 @@ using Microsoft.ProgramSynthesis.Utils;
 namespace ProseSummative {
     public static class Semantics {
 
-        /*
-        // An operator that converts a positive or negative number into an
-        // an index into a string. For example, the number -2 on string "walrus"
-        // will be converted to 4, because "walrus" is 6 characters long.
+        public static string Substring(string v, int start, int end) => v.Substring(start, end - start);
+
         public static int? AbsPos(string v, int k) {
             return k > 0 ? k - 1 : v.Length + k + 1;
         }
-        */
 
     }
 }
