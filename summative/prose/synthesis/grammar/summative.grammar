@@ -1,0 +1,9 @@
+﻿using semantics ProseSummative.Semantics;
+using learners ProseSummative.WitnessFunctions;
+
+language Summative;
+
+@complete feature double Score = ProseSummative.RankingScore;
+
+@input string v;
+@start string program = TODO
