@@ -5,5 +5,9 @@ language Summative;
 
 @complete feature double Score = ProseSummative.RankingScore;
 
-@input string v;
-@start string program = TODO
+@input string x;
+@start string program := Substring(x, pos);
+int? pos := // A position at index 'k' (from the left if k >= 0, or from the right if k < 0)
+            AbsPos(x, k)
+int k;
+
