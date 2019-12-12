@@ -26,7 +26,7 @@ open Ast
 %token SEMICOLON
 %token AT
 
-%left PLUS DASH
+%left PLUS
 %nonassoc LPAREN
 
 /* ---------------------------------------------------------------------- */
@@ -62,6 +62,7 @@ exp:
 | TRUE {CBool true}
 | FALSE {CBool false}
 | i=INT {CInt (Int64.to_int i)}
+| DASH i=INT {CInt (-1 * (Int64.to_int i))}
 | s=STRING {CStr s}
 | e1=exp b=bop e2=exp {Bop(b, e1, e2)}
 | id=IDENT {Id id}
@@ -69,4 +70,3 @@ exp:
 
 %inline bop:
 | PLUS   { Add }
-| DASH   { Sub }

@@ -1,2 +1,2 @@
 [FeatureCalculator(nameof(Semantics.Substring))]
-public static double Substring(double v, double start, double end) => -1.0;
+public static double Substring(double v, double start, double end) => v + start + end - 1;
