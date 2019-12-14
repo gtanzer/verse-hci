@@ -1,6 +1,6 @@
 # verse
 
-A synthesizer for synthesizers built on top of the PROSE framework. TODO: expand on this more.
+A synthesizer for synthesizers built on top of the PROSE framework. See VERSE.pdf for more details.
 
 ## Usage
 
